@@ -5,6 +5,7 @@ import { StaticImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import * as styles from "../components/index.module.css"
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 const links = [
   {
@@ -32,6 +33,25 @@ const links = [
       "Now you’re ready to show the world! Give your Gatsby site superpowers: Build and host on Gatsby Cloud. Get started for free!",
   },
 ]
+
+export const query = graphql`
+  {
+    allContentfulBlogPost {
+      nodes {
+        title
+        slug
+        heroImage {
+          gatsbyImageData(layout: CONSTRAINED, width: 600)
+        }
+        body {
+          childMarkdownRemark {
+            excerpt(pruneLength: 200)
+          }
+        }
+      }
+    }
+  }
+`;
 
 const samplePageLinks = [
   {
@@ -109,6 +129,14 @@ const IndexPage = () => (
         </li>
       ))}
     </ul>
+    {data.allContentfulBlogPost.nodes.map(post => (
+      <div key={post.slug}>
+        <h2>{post.title}</h2>
+        <GatsbyImage image={getImage(post.heroImage)} alt={post.title} />
+        <p>{post.body.childMarkdownRemark.excerpt}</p>
+        <Link to={`/blog/${post.slug}`}>Read More</Link>
+      </div>
+    ))}
     {moreLinks.map((link, i) => (
       <React.Fragment key={link.url}>
         <a href={`${link.url}${utmParameters}`}>{link.text}</a>
