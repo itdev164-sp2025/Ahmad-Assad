@@ -21,6 +21,22 @@ const UsingDSG = () => (
   </Layout>
 )
 
+
+export const query = graphql`
+  query($slug: String!) {
+    contentfulBlogPost(slug: { eq: $slug }) {
+      title
+      heroImage {
+        gatsbyImageData(layout: FULL_WIDTH)
+      }
+      body {
+        childMarkdownRemark {
+          html
+        }
+      }
+    }
+  }
+`;
 export const Head = () => <Seo title="Using DSG" />
 
 export default UsingDSG

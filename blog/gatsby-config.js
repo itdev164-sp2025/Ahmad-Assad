@@ -7,6 +7,9 @@
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+  });
 module.exports = {
   siteMetadata: {
     title: "My Gatsby Blog",
@@ -25,6 +28,10 @@ module.exports = {
         name: `images`,
         path: `${__dirname}/src/images`,
       },
+      resolve: "gatsby-transformer-remark",
+      options: {
+        plugins: [],
+      },
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
@@ -40,11 +47,11 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-contentful`,
+      resolve: "gatsby-source-contentful",
       options: {
-        spaceId: `ASSADA5`,
-        accessToken: `FIRSTBLOG`,
-      },
+        spaceId: process.env.hhw0otuzizr6,
+        accessToken: process.env.dtelreve2_jY1aaR-jq9-gepjjceoWdkpQuysXfVFuE,
+},
     },
   ],
 };
