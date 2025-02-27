@@ -5,15 +5,27 @@
  * See: https://www.gatsbyjs.com/docs/how-to/querying-data/use-static-query/
  */
 
-import * as React from "react"
+import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-
 import Header from "./header"
-import "./layout.css"
+import styled, { ThemeProvider } from "styled-components"
+import { Gray } from "./themes"
+
+const Content = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+`
+
+const Footer = styled.footer`
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+`
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
+    query {
       site {
         siteMetadata {
           title
@@ -23,28 +35,11 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: `var(--size-content)`,
-          padding: `var(--size-gutter)`,
-        }}
-      >
-        <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `var(--space-5)`,
-            fontSize: `var(--font-sm)`,
-          }}
-        >
-          © {new Date().getFullYear()} &middot; Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
-      </div>
-    </>
+    <ThemeProvider theme={Gray}>
+      <Header />
+      <Content>{children}</Content>
+      <Footer>© {new Date().getFullYear()} {data.site.siteMetadata.title}</Footer>
+    </ThemeProvider>
   )
 }
 
