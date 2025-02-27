@@ -9,7 +9,7 @@ const StyledHeader = styled.header`
 `
 
 const StyledLink = styled(Link)`
-  color: ${(props) => props.theme.headerFontColor};
+   color: ${(props) => props.theme.headerFontColor};
   text-decoration: none;
   font-size: 24px;
   font-weight: bold;
