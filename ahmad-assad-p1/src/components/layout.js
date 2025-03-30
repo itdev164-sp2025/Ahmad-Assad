@@ -5,11 +5,11 @@
  * See: https://www.gatsbyjs.com/docs/how-to/querying-data/use-static-query/
  */
 
-import React from 'react';
-import Navbar from './Navbar';
+import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle, { lightTheme, darkTheme } from '../styles/GlobalStyles';
-import { useState } from 'react';
+import { Box } from 'rebass';
+import { Header } from './Header';
 
 const Layout = ({ children }) => {
   const [theme, setTheme] = useState('light');
@@ -18,8 +18,12 @@ const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <GlobalStyle />
-      <Navbar toggleTheme={toggleTheme} />
-      <main>{children}</main>
+      <Box>
+        <Header toggleTheme={toggleTheme} />
+        <Box as="main" px={3} py={2}>
+          {children}
+        </Box>
+      </Box>
     </ThemeProvider>
   );
 };
