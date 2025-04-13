@@ -1,24 +1,41 @@
-import React from 'react';
-import { Link } from 'gatsby';
-import PropTypes from 'prop-types';
-import { H1 } from '../Heading';
+import React from 'react'
+import styled from 'styled-components'
+import { Flex, Box } from 'rebass'
+import { Link } from 'gatsby'
+import { Search } from 'styled-icons/feather'
+import { IconButton } from '../Button'
+import { H1 } from '../Heading'
+
+// Styled components with theme variants
+const StyledHeader = styled(Flex)`
+  ${({ theme }) => {
+    const variant = theme.variants?.header?.primary
+    return variant ? `background-color: ${variant.backgroundColor};` : ''
+  }}
+`
+
+const StyledLink = styled(Link)`
+  ${({ theme }) => {
+    const variant = theme.variants?.header?.primary
+    return variant ? `color: ${variant.color}; text-decoration: none;` : ''
+  }}
+`
 
 const Header = ({ TestSite }) => (
-  <header>
-    <H1>
-      <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
-        {TestSite}
-      </Link>
-    </H1>
-  </header>
-);
+  <StyledHeader
+    as="header"
+    px={3}
+    py={2}
+    alignItems="center"
+    justifyContent="space-between"
+  >
+    <Box>
+      <H1>
+        <StyledLink to="/">{TestSite}</StyledLink>
+      </H1>
+    </Box>
+    <IconButton icon={<Search />} variant="contrast" />
+  </StyledHeader>
+)
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-};
-
-Header.defaultProps = {
-  siteTitle: 'TestSite',
-};
-
-export default Header;
+export default Header
