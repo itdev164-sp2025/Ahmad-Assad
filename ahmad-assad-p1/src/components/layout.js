@@ -1,31 +1,20 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/how-to/querying-data/use-static-query/
- */
-
-import React, { useState } from 'react';
-import { ThemeProvider } from 'styled-components';
-import GlobalStyle, { lightTheme, darkTheme } from '../styles/GlobalStyles';
-import { Box } from 'rebass';
-import { Header } from './Header';
+import React from 'react'
+import { ThemeProvider } from 'styled-components'
+import { Box } from 'rebass'
+import { Header } from './Header'
+import { theme } from '../components/themes/Gray/Gray'
 
 const Layout = ({ children }) => {
-  const [theme, setTheme] = useState('light');
-  const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
-
   return (
-    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-      <GlobalStyle />
+    <ThemeProvider theme={theme}>
       <Box>
-        <Header toggleTheme={toggleTheme} />
+        <Header />
         <Box as="main" px={3} py={2}>
           {children}
         </Box>
       </Box>
     </ThemeProvider>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout
