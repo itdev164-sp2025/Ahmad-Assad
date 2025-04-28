@@ -2,9 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import { Flex, Box } from 'rebass'
 import { Link } from 'gatsby'
-import { Search } from 'styled-icons/feather'
-import { IconButton } from '../Button'
 import { H1 } from '../Heading'
+import { Flex } from 'rebass';
+import { SearchButton } from '../Button';
+import { ThemeConsumer } from 'styled-components';
+
 
 // Styled components with theme variants
 const StyledHeader = styled(Flex)`
@@ -15,6 +17,7 @@ const StyledHeader = styled(Flex)`
 `
 
 const StyledLink = styled(Link)`
+margin: 0 10px;
   ${({ theme }) => {
     const variant = theme.variants?.header?.primary
     return variant ? `color: ${variant.color}; text-decoration: none;` : ''
