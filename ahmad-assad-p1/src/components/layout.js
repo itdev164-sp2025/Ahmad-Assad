@@ -17,4 +17,8 @@ const Layout = ({ children }) => {
   )
 }
 
+<Main m={20}>
+  {children}
+</Main>
+
 export default Layout

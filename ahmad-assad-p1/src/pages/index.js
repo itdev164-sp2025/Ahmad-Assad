@@ -1,8 +1,15 @@
 import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
-import { List, ListItem } from "../components/List";
 import { Box, Image, Text, Link } from "rebass";
+import styled from 'styled-components';
+import { Box, Card, Heading } from 'rebass';
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+`;
 
 const IndexPage = ({ data }) => {
   return (
