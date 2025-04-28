@@ -1,0 +1,1 @@
+import { GatsbyImage } from 'gatsby-plugin-image';
